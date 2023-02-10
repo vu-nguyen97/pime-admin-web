@@ -8,7 +8,7 @@ export function login(data) {
   // console.log(payload)
 
   return request({
-    url: '/admin-api/auth/login',
+    url: '/moon-api/auth/login',
     method: 'post',
     data
   })
@@ -17,7 +17,7 @@ export function login(data) {
 export function getInfo(token) {
   // token = 'admin-token'
   return request({
-    url: '/admin-api/auth/info',
+    url: '/moon-api/auth/info',
     method: 'get'
     // params: { token }
   })
@@ -25,7 +25,7 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: '/vue-element-admin/user/logout',
+    url: '/moon-api/auth/logout',
     method: 'post'
   })
 }

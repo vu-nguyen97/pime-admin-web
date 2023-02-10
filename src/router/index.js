@@ -10,6 +10,7 @@ import Layout from '@/layout'
 // import componentsRouter from './modules/components'
 // import chartsRouter from './modules/charts'
 // import tableRouter from './modules/table'
+import assetsBundleRouter from './asset-bundles'
 import configRouter from './modules/config'
 import pokerRouter from './modules/games/poker'
 // import nestedRouter from './modules/nested'
@@ -192,6 +193,7 @@ export const asyncRoutes = [
   // nestedRouter,
   configRouter,
   pokerRouter,
+  assetsBundleRouter,
   // tableRouter,
 
   // {
