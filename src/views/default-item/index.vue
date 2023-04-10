@@ -2,7 +2,10 @@
   <div class="app-container">
     <div class="p-filter">
       <el-input v-model="search" placeholder="Search by id" clearable class="u-inputWidth" />
-      <el-button type="primary" class="" @click="handleAdd">Add</el-button>
+      <el-button type="primary" class="" @click="handleAdd">
+        <i class="pi pi-plus pi-btnSize" />
+        Add
+      </el-button>
     </div>
 
     <el-table v-loading="isLoading" :data="pagedTableData" border highlight-current-row style="margin-top: 30px">

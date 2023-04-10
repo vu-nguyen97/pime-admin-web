@@ -215,7 +215,7 @@ export const asyncRoutes = [
       component: () =>
         import ('@/views/default-item/index'),
       name: 'DefaultItem',
-      meta: { title: 'Default Item', icon: 'skill' }
+      meta: { title: 'Default Item', icon: 'education' }
     }]
   },
 
