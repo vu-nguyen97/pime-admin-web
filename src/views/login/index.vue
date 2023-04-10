@@ -97,8 +97,10 @@ export default {
     }
     return {
       loginForm: {
-        username: 'tuanlt@onesoft.com.vn',
-        password: 'SU5GdG5kMC03NzIxMjFiOC1mMmE3LTQxZGUtYjVmNi1mYmVmZGQ5YmM0NWM6dHVhbmx0QG9uZXNvZnQuY29tLnZuOjE2NjQ0NDg0Mjc4NzE'
+        username: 'tuantv@falcongames.com',
+        password: 'Pime1!2@'
+        // username: 'tuanlt@onesoft.com.vn',
+        // password: 'SU5GdG5kMC03NzIxMjFiOC1mMmE3LTQxZGUtYjVmNi1mYmVmZGQ5YmM0NWM6dHVhbmx0QG9uZXNvZnQuY29tLnZuOjE2NjQ0NDg0Mjc4NzE'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],

@@ -196,6 +196,29 @@ export const asyncRoutes = [
   assetsBundleRouter,
   // tableRouter,
 
+  {
+    path: '/audit',
+    component: Layout,
+    children: [{
+      path: 'index',
+      component: () =>
+        import ('@/views/audit/index'),
+      name: 'Audit',
+      meta: { title: 'Audit', icon: 'skill' }
+    }]
+  },
+  {
+    path: '/default-item',
+    component: Layout,
+    children: [{
+      path: 'index',
+      component: () =>
+        import ('@/views/default-item/index'),
+      name: 'DefaultItem',
+      meta: { title: 'Default Item', icon: 'skill' }
+    }]
+  },
+
   // {
   //   path: '/example',
   //   component: Layout,

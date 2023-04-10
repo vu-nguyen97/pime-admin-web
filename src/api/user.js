@@ -8,7 +8,7 @@ export function login(data) {
   // console.log(payload)
 
   return request({
-    url: '/moon-api/auth/login',
+    url: '/admin-api/auth/login',
     method: 'post',
     data
   })
@@ -17,7 +17,7 @@ export function login(data) {
 export function getInfo(token) {
   // token = 'admin-token'
   return request({
-    url: '/moon-api/auth/info',
+    url: '/admin-api/auth/info',
     method: 'get'
     // params: { token }
   })
