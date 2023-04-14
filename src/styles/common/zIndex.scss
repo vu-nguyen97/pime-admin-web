@@ -1,0 +1,29 @@
+$z-index-values: (
+  1000: 1000,
+  1010: 1010,
+  1020: 1020,
+  1030: 1030,
+  1040: 1040,
+  1050: 1050,
+  1060: 1060,
+  1070: 1070,
+  1080: 1080,
+  1090: 1090,
+);
+
+// 1000: fixed - Ex: header
+// 1010: modal + modal-mask
+// 1020: message + notification
+// 1030: popover
+// 1040: dropdown + select
+// 1050: picker
+// 1060: popoconfirm
+// 1070: tooltip
+// 1080:
+// 1090: layer - Ex: loading
+
+@for $i from 1 through length($space-values) {
+  .z-#{$i} {
+    z-index: map-get($z-index-values, $i);
+  }
+}

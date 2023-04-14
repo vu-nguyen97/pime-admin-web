@@ -1,0 +1,21 @@
+@import '../variables.scss';
+
+.text-xs {
+  font-size: 12px;
+}
+
+.text-sm {
+  font-size: 13px;
+}
+
+.text-md {
+  font-size: 14px;
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.text-filter {
+  color: $filterColor;
+}

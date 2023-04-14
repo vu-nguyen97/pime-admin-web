@@ -1,0 +1,105 @@
+$space-values: (
+  0: 0,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  5: 1.25rem,
+  6: 1.5rem,
+);
+
+@for $i from 0 through length($space-values) {
+  .m-#{$i} {
+    margin: map-get($space-values, $i);
+  }
+  .mt-#{$i} {
+    margin-top: map-get($space-values, $i);
+  }
+  .mr-#{$i} {
+    margin-right: map-get($space-values, $i);
+  }
+  .mb-#{$i} {
+    margin-bottom: map-get($space-values, $i);
+  }
+  .ml-#{$i} {
+    margin-left: map-get($space-values, $i);
+  }
+  .mx-#{$i} {
+    margin-left: map-get($space-values, $i);
+    margin-right: map-get($space-values, $i);
+  }
+  .my-#{$i} {
+    margin-top: map-get($space-values, $i);
+    margin-bottom: map-get($space-values, $i);
+  }
+  .m-i#{$i} {
+    margin: map-get($space-values, $i) !important;
+  }
+  .mt-i#{$i} {
+    margin-top: map-get($space-values, $i) !important;
+  }
+  .mr-i#{$i} {
+    margin-right: map-get($space-values, $i) !important;
+  }
+  .mb-i#{$i} {
+    margin-bottom: map-get($space-values, $i) !important;
+  }
+  .ml-i#{$i} {
+    margin-left: map-get($space-values, $i) !important;
+  }
+  .mx-i#{$i} {
+    margin-left: map-get($space-values, $i) !important;
+    margin-right: map-get($space-values, $i) !important;
+  }
+  .my-i#{$i} {
+    margin-top: map-get($space-values, $i) !important;
+    margin-bottom: map-get($space-values, $i) !important;
+  }
+  
+  .p-#{$i} {
+    padding: map-get($space-values, $i);
+  }
+  .pt-#{$i} {
+    padding-top: map-get($space-values, $i);
+  }
+  .pr-#{$i} {
+    padding-right: map-get($space-values, $i);
+  }
+  .pb-#{$i} {
+    padding-bottom: map-get($space-values, $i);
+  }
+  .pl-#{$i} {
+    padding-left: map-get($space-values, $i);
+  }
+  .px-#{$i} {
+    padding-left: map-get($space-values, $i);
+    padding-right: map-get($space-values, $i);
+  }
+  .py-#{$i} {
+    padding-top: map-get($space-values, $i);
+    padding-bottom: map-get($space-values, $i);
+  }
+  .p-i#{$i} {
+    padding: map-get($space-values, $i) !important;
+  }
+  .pt-i#{$i} {
+    padding-top: map-get($space-values, $i) !important;
+  }
+  .pr-i#{$i} {
+    padding-right: map-get($space-values, $i) !important;
+  }
+  .pb-i#{$i} {
+    padding-bottom: map-get($space-values, $i) !important;
+  }
+  .pl-i#{$i} {
+    padding-left: map-get($space-values, $i) !important;
+  }
+  .px-i#{$i} {
+    padding-left: map-get($space-values, $i) !important;
+    padding-right: map-get($space-values, $i) !important;
+  }
+  .py-i#{$i} {
+    padding-top: map-get($space-values, $i) !important;
+    padding-bottom: map-get($space-values, $i) !important;
+  }
+}

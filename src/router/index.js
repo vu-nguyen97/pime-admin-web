@@ -211,11 +211,22 @@ export const asyncRoutes = [
     path: '/default-item',
     component: Layout,
     children: [{
-      path: 'index',
+      path: '',
       component: () =>
         import ('@/views/default-item/index'),
       name: 'DefaultItem',
       meta: { title: 'Default Item', icon: 'education' }
+    }]
+  },
+  {
+    path: '/user-management',
+    component: Layout,
+    children: [{
+      path: '',
+      component: () =>
+        import ('@/views/user-management/index'),
+      name: 'UserManagement',
+      meta: { title: 'User management', icon: 'peoples' }
     }]
   },
 

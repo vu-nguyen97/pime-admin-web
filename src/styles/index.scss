@@ -7,7 +7,10 @@
 @import './theme.scss';
 @import './common/class.scss';
 @import './common/page.scss';
+@import './common/spaces.scss';
+@import './common/text.scss';
 @import './common/utility.scss';
+@import './common/zIndex.scss';
 
 body {
   height: 100%;
@@ -67,14 +70,6 @@ div:focus {
 
 .fl {
   float: left;
-}
-
-.pr-5 {
-  padding-right: 5px;
-}
-
-.pl-5 {
-  padding-left: 5px;
 }
 
 .block {
