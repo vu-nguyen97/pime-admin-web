@@ -30,3 +30,10 @@ export function editItem(data) {
     data
   })
 }
+
+export function getAllCategories() {
+  return request({
+    url: '/admin-api/default-items/categories',
+    method: 'get'
+  })
+}

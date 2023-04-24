@@ -4,8 +4,18 @@
       <el-form-item label="Id" prop="id">
         <el-input v-model="form.id" placeholder="Enter a id" :disabled="Object.keys(editedData).length > 0" />
       </el-form-item>
+      <el-form-item label="Category" prop="category">
+        <el-select v-model="form.category" placeholder="Select a type" class="w-full" clearable>
+          <el-option
+            v-for="item in categoryOpts"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item label="Item type" prop="activedType">
-        <el-select v-model="form.activedType" placeholder="Select a type" class="w-full">
+        <el-select v-model="form.activedType" placeholder="Select a type" class="w-full" clearable>
           <el-option
             v-for="item in typeOpts"
             :key="item.value"
@@ -15,7 +25,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="How to get" prop="activedGetterType">
-        <el-select v-model="form.activedGetterType" multiple placeholder="Select a type" class="w-full">
+        <el-select v-model="form.activedGetterType" multiple placeholder="Select a type" class="w-full" clearable>
           <el-option
             v-for="item in getterTypeOpts"
             :key="item.value"
@@ -25,7 +35,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="Rarity" prop="activedRarity">
-        <el-select v-model="form.activedRarity" placeholder="Select a rarity" class="w-full">
+        <el-select v-model="form.activedRarity" placeholder="Select a rarity" class="w-full" clearable>
           <el-option
             v-for="item in rarityOpts"
             :key="item.value"
@@ -46,11 +56,13 @@
 </template>
 
 <script>
+import { getLabelFromStr } from '@/utils/format'
 import { createItem, editItem } from '@/api/default-items'
-import { ITEM_GETTER_TYPES, DEFAULF_ITEM_TYPES, RARITIES } from '@/constants/dropdowns'
+import { ITEM_GETTER_TYPES, RARITIES } from '@/constants/dropdowns'
 import { getDrdFromObj } from '@/utils/helper'
 import { ADD_SUCCESS_MESS, EDIT_SUCCESS_MESS } from '@/constants/messages'
 import { INPUT_REQUIRED, SELECT_REQUIRED, NUMBER_REQUIRED } from '@/constants/validate'
+import { getActivedType } from '@/utils/helper'
 
 export default {
   name: 'ModalAdd',
@@ -63,6 +75,10 @@ export default {
       type: Object,
       default() { return {} }
     },
+    categoryData: {
+      type: Array,
+      default() { return [] }
+    },
     updateTableData: {
       type: Function,
       default: () => {}
@@ -70,18 +86,23 @@ export default {
   },
   data() {
     return {
-      typeOpts: getDrdFromObj(DEFAULF_ITEM_TYPES),
+      typeOpts: [],
       getterTypeOpts: getDrdFromObj(ITEM_GETTER_TYPES),
       rarityOpts: getDrdFromObj(RARITIES),
+      categoryOpts: this.categoryData.map(el => {
+        return { label: getLabelFromStr(el.category), value: el.category }
+      }),
       form: {
         id: '',
-        activedType: '',
+        category: null,
+        activedType: null,
         activedGetterType: [],
-        activedRarity: '',
+        activedRarity: null,
         form: 1
       },
       rules: {
         id: [{ required: true, message: INPUT_REQUIRED, trigger: 'blur' }],
+        category: [{ required: true, message: SELECT_REQUIRED, trigger: 'change' }],
         activedType: [{ required: true, message: SELECT_REQUIRED, trigger: 'change' }],
         activedGetterType: [{ required: true, message: SELECT_REQUIRED, trigger: 'change' }],
         activedRarity: [{ required: true, message: SELECT_REQUIRED, trigger: 'change' }],
@@ -89,14 +110,24 @@ export default {
       }
     }
   },
+  watch: {
+    'form.category': function(val, oldVal) {
+      this.typeOpts = getActivedType(this.categoryData, val)
+
+      if (oldVal) {
+        this.form.activedType = null
+      }
+    }
+  },
   created() {
     if (Object.keys(this.$props.editedData).length) {
-      const { form, how_to_gets, id, stats, type } = this.$props.editedData
+      const { form, how_to_gets, id, stats, type, category } = this.$props.editedData
       this.form = {
         id,
         activedType: type,
         activedGetterType: how_to_gets,
         activedRarity: stats?.rarity,
+        category,
         form
       }
     }
@@ -123,10 +154,11 @@ export default {
       this.$refs[formName].resetFields()
     },
     getParams() {
-      const { id, activedType, activedGetterType, activedRarity, form } = this.form
+      const { id, activedType, activedGetterType, activedRarity, form, category } = this.form
       const params = {
         id,
         form,
+        category: category,
         type: activedType,
         how_to_gets: activedGetterType,
         stats: {
