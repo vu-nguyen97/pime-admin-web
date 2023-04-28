@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import { pickerOptions, init7Days } from '@/utils/helpers/calendar'
 
 export default {
   name: 'Audit',
@@ -74,46 +74,13 @@ export default {
         { value: 'Action2', label: 'Action2' }
       ],
       activedAction: '',
-      pickerOptions: {
-        shortcuts: [{
-          text: 'Last week',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: 'Last month',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: 'Last 3 months',
-          onClick(picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
-          }
-        }]
-      },
-      rangeDate: ''
+      pickerOptions,
+      rangeDate: init7Days()
     }
   },
   created() {
-    this.initDate()
   },
   methods: {
-    initDate() {
-      const formatedDate = 'DD-MM-YYY'
-      const initStartDate = moment(new Date()).subtract(7, 'days').format(formatedDate)
-      const initEndDate = moment(new Date()).format(formatedDate)
-      this.rangeDate = [initStartDate, initEndDate]
-    },
     handleSearch() {
       const startDate = this.rangeDate[0]
       const endDate = this.rangeDate[1]

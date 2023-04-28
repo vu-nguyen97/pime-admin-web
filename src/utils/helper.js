@@ -1,6 +1,18 @@
 import { getLabelFromStr } from './format'
 import { SORT_TYPES, ASC } from '../constants/constants'
 
+export const getCountryNameFromCode = (code = 'VN') => {
+  try {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames
+    const regionNamesInEnglish = new Intl.DisplayNames(['en'], {
+      type: 'region'
+    })
+    return regionNamesInEnglish.of(code.toUpperCase()) || code
+  } catch (error) {
+    return code
+  }
+}
+
 export const getDrdFromObj = (objData, getKey = false) => {
   if (!Object.keys(objData || {}).length) return []
 

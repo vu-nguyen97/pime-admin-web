@@ -196,17 +196,17 @@ export const asyncRoutes = [
   assetsBundleRouter,
   // tableRouter,
 
-  {
-    path: '/audit',
-    component: Layout,
-    children: [{
-      path: 'index',
-      component: () =>
-        import ('@/views/audit/index'),
-      name: 'Audit',
-      meta: { title: 'Audit', icon: 'skill' }
-    }]
-  },
+  // {
+  //   path: '/audit',
+  //   component: Layout,
+  //   children: [{
+  //     path: 'index',
+  //     component: () =>
+  //       import ('@/views/audit/index'),
+  //     name: 'Audit',
+  //     meta: { title: 'Audit', icon: 'skill' }
+  //   }]
+  // },
   {
     path: '/default-item',
     component: Layout,
@@ -221,13 +221,26 @@ export const asyncRoutes = [
   {
     path: '/user-management',
     component: Layout,
+    meta: { title: 'User', icon: 'peoples' },
     children: [{
       path: '',
       component: () =>
         import ('@/views/user-management/index'),
       name: 'UserManagement',
-      meta: { title: 'User management', icon: 'peoples' }
-    }]
+      meta: { title: 'User Management', icon: 'peoples' }
+    },
+    {
+      hidden: true,
+      path: 'user-detail/:id',
+      component: () =>
+        import ('@/views/user-management/user-detail/index'),
+      name: 'UserDetail',
+      meta: {
+        title: 'User Detail',
+        activeMenu: '/user-management'
+      }
+    }
+    ]
   },
 
   // {

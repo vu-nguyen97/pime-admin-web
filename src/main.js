@@ -9,6 +9,7 @@ import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 import './styles/element-variables.scss'
 import '@/styles/index.scss' // global css
 import 'primeicons/primeicons.css'
+import 'flag-icons/css/flag-icons.min.css'
 
 import App from './App'
 import store from './store'

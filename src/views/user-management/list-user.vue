@@ -30,6 +30,9 @@
         <template slot="header">
           <table-sort-icons field="id" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
+        <template slot-scope="{row}">
+          <span class="cursor-pointer hover-primary" title="View this user" @click="handleClickView(row)">{{ row.id }}</span>
+        </template>
       </el-table-column>
       <el-table-column align="center" width="100" prop="sex">
         <template slot="header">
@@ -94,6 +97,13 @@
         </template>
         <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.usdt | numberWithCommas }}</span></template>
       </el-table-column>
+      <el-table-column align="center" label="Action" width="110">
+        <template slot-scope="{row}">
+          <el-button size="mini" @click="handleClickView(row)">
+            View
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <div class="u-paginationWrapper">
       <el-pagination
@@ -143,6 +153,10 @@ export default {
     this.getTableData()
   },
   methods: {
+    handleClickView(rowData) {
+      this.$router.push({ name: 'UserDetail', params: { id: rowData.id }})
+      // this.$router.push({ path: `/user-management/user-detail/${rowData.id}` })
+    },
     getTableData() {
       const { size, page } = this.tableMeta
       const listCurrencies = ['pime', 'gold', 'usdt', 'chip', 'gem']

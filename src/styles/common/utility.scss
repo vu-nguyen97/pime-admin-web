@@ -26,3 +26,13 @@
     grid-column: span 10/span 10;
   }
 }
+
+.u-inputNumber-xs {
+  width: 40px;
+  
+  input {
+    height: 28px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+}

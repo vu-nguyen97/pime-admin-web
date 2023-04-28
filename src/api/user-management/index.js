@@ -15,3 +15,34 @@ export function searchTopLevel(params) {
     params
   })
 }
+
+// APIs for DetailUser page
+export function getUser(id) {
+  return request({
+    url: `/admin-api/accounts/${id}`,
+    method: 'get'
+  })
+}
+
+export function getSourcesAndSinks(params) {
+  return request({
+    url: '/admin-api/accounts/currency-mov',
+    method: 'get',
+    params
+  })
+}
+
+export function getBanReasons() {
+  return request({
+    url: '/admin-api/accounts/ban/reasons',
+    method: 'get'
+  })
+}
+
+export function banUser(data) {
+  return request({
+    url: 'admin-api/accounts/ban',
+    method: 'post',
+    data
+  })
+}
