@@ -5,3 +5,30 @@
 .pi-btnSize {
   font-size: 0.8rem;
 }
+
+.small-scroll {
+  ::-webkit-scrollbar {
+    width: 5px; /* Width of vertical scrollbar */
+    height: 5px; /* Height of horizontal scrollbar */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background color of scrollbar track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #a1a1aa; /* Background color of scrollbar thumb */
+  }
+  
+  /* For Firefox */
+  
+  /* Width and height of scrollbar */
+  // scrollbar-width: thin;
+  // scrollbar-height: thin;
+  
+  // /* Background color of scrollbar track */
+  // scrollbar-track-color: #f1f1f1;
+  
+  // /* Background color of scrollbar thumb */
+  // scrollbar-thumb-color: #888;
+}

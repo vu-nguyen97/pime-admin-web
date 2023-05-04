@@ -1,20 +1,5 @@
 <template>
   <div class="DetailUser">
-    <!-- <div>
-      <el-date-picker
-        v-model="rangeDate"
-        type="daterange"
-        align="right"
-        unlink-panels
-        range-separator="To"
-        start-placeholder="Start date"
-        end-placeholder="End date"
-        format="dd-MM-yyyy"
-        value-format="dd-MM-yyyy"
-        :picker-options="pickerOptions"
-      />
-      <el-button type="primary" class="ml-2" @click="handleSearch">Search</el-button>
-    </div> -->
     <div v-if="Object.keys(user).length" class="">
       <el-row :gutter="40" class="text-md">
         <el-col :span="10" :lg="6">
@@ -57,6 +42,7 @@
               </div>
             </div>
           </div>
+          <sources-sinks />
           <ban-user :user="user" @updateUser="updateUser" />
         </el-col>
       </el-row>
@@ -66,17 +52,15 @@
 
 <script>
 import moment from 'moment'
-import { getUser, getSourcesAndSinks } from '@/api/user-management'
+import { getUser } from '@/api/user-management'
 import { getCountryNameFromCode } from '@/utils/helper'
 import { capitalizeWord } from '@/utils/format'
-import { pickerOptions, init7Days } from '@/utils/helpers/calendar'
 import BanUser from './ban-user.vue'
+import SourcesSinks from './sources-sinks.vue'
 
 export default {
   name: 'UserDetail',
-  components: {
-    BanUser
-  },
+  components: { BanUser, SourcesSinks },
   filters: {
     countryFilter: function(code) {
       return getCountryNameFromCode(code)
@@ -92,28 +76,14 @@ export default {
   data() {
     return {
       user: {},
-      hasBanStatus: false,
-      pickerOptions,
-      rangeDate: init7Days(),
-      totalSinks: 0,
-      totalSources: 0,
-      sinks: [],
-      sources: []
+      hasBanStatus: false
     }
   },
   created() {
     const userId = this.$route.params.id
-    // const [startDate, endDate] = this.rangeDate
-    // const params = {
-    //   from: startDate,
-    //   to: endDate,
-    //   id: userId
-    // }
 
-    Promise.all([getUser(userId), getSourcesAndSinks({ id: userId })]).then((res) => {
-      const userData = res[0].data
-      console.log('>>>>>', res[1]) // split comp
-
+    getUser(userId).then((res) => {
+      const userData = res.data
       if (!userData) return
 
       this.user = userData
@@ -122,19 +92,6 @@ export default {
     })
   },
   methods: {
-    handleSearch() {
-      const userId = this.$route.params.id
-      const [startDate, endDate] = this.rangeDate
-      const params = {
-        from: startDate,
-        to: endDate,
-        id: userId
-      }
-      getSourcesAndSinks(params).then(res => {
-        this.sinks = res.data?.sinks || []
-        this.sources = res.data?.sources || []
-      })
-    },
     updateUser(newData) {
       this.user = newData
     }

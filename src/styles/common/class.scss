@@ -6,6 +6,9 @@
 .h-full {
   height: 100%
 }
+.h-auto {
+  height: auto;
+}
 .w-50 {
   width: 50%;
 }
@@ -20,6 +23,9 @@
 
 .inline-block {
   display: inline-block;
+}
+.hidden {
+  display: none;
 }
 
 .flex {
@@ -40,6 +46,10 @@
 
 .items-center {
   align-items: center;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
 }
 
 .shrink-0 {
@@ -72,4 +82,10 @@
 
 .bg-white {
   background-color: white;
+}
+
+@media (min-width: 992px) {
+  .md-block {
+    display: block;
+  }
 }
