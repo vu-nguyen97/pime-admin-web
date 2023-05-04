@@ -33,16 +33,8 @@
               </div>
             </div>
           </div>
-          <div v-if="user.currency" class="p-6 bg-white shadow-lg rounded border mt-6">
-            <div class="p-sectionTitle">Currencies</div>
-            <div class="ListCurrency">
-              <div v-for="(value, stat) in user.currency" :key="stat" class="statsBg p-2 rounded text-center shadow">
-                <div class="">{{ stat | statFilter }}</div>
-                <div class="mt-2 number">{{ value }}</div>
-              </div>
-            </div>
-          </div>
-          <sources-sinks />
+          <currencies :currencies="user.currency" @updateCurrency="handleUpdateCurrency" />
+          <sources-sinks :update-key="updateKey" />
           <ban-user :user="user" @updateUser="updateUser" />
         </el-col>
       </el-row>
@@ -57,10 +49,12 @@ import { getCountryNameFromCode } from '@/utils/helper'
 import { capitalizeWord } from '@/utils/format'
 import BanUser from './ban-user.vue'
 import SourcesSinks from './sources-sinks.vue'
+import Currencies from './currencies.vue'
+import { numberWithCommas } from '@/utils/helper'
 
 export default {
   name: 'UserDetail',
-  components: { BanUser, SourcesSinks },
+  components: { BanUser, SourcesSinks, Currencies },
   filters: {
     countryFilter: function(code) {
       return getCountryNameFromCode(code)
@@ -71,12 +65,14 @@ export default {
     moment: function(date) {
       if (!date) return ''
       return moment(date).format('DD-MM-YYYY, HH:mm')
-    }
+    },
+    numberWithCommas
   },
   data() {
     return {
       user: {},
-      hasBanStatus: false
+      hasBanStatus: false,
+      updateKey: 1
     }
   },
   created() {
@@ -94,10 +90,43 @@ export default {
   methods: {
     updateUser(newData) {
       this.user = newData
+    },
+    handleUpdateCurrency(newCrr) {
+      this.user.currency = newCrr
+
+      // Update sources & sinks
+      this.updateKey = this.updateKey + 1
     }
   }
 }
 </script>
+
+<style lang="scss">
+  .DetailUser {
+    .ListStat, .ListCurrency {
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .statsBg {
+      background-color: #f8fafc;
+      margin: 0.5rem 0.5rem 0;
+      width: 100px;
+    }
+
+    .ListCurrency .statsBg {
+      width: 150px;
+    }
+
+    .number {
+      font-size: 22px;
+      font-weight: 600;
+      color: #42b983;
+    }
+  }
+</style>
 
 <style lang="scss" scoped>
   .DetailUser {
@@ -126,28 +155,5 @@ export default {
     //   font-weight: 600;
     //   width: $width;
     // }
-
-    .ListStat, .ListCurrency {
-      margin-left: -0.5rem;
-      margin-right: -0.5rem;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .statsBg {
-      background-color: #f8fafc;
-      margin: 0.5rem 0.5rem 0;
-      width: 100px;
-    }
-
-    .ListCurrency .statsBg {
-      width: 150px;
-    }
-
-    .number {
-      font-size: 22px;
-      font-weight: 600;
-      color: #42b983;
-    }
   }
 </style>

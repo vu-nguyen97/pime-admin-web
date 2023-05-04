@@ -59,6 +59,12 @@ import { pickerOptions, init7Days } from '@/utils/helpers/calendar'
 
 export default {
   name: 'SourcesSinks', filters: { getLabelFromStr },
+  props: {
+    updateKey: {
+      type: Number,
+      default: 1
+    }
+  },
   data() {
     return {
       pickerOptions,
@@ -67,6 +73,11 @@ export default {
       // totalSources: 0,
       sinks: [],
       sources: []
+    }
+  },
+  watch: {
+    updateKey(newValue, oldValue) {
+      this.handleSearch()
     }
   },
   created() {
@@ -82,7 +93,6 @@ export default {
         id: userId
       }
       getSourcesAndSinks(params).then(res => {
-        console.log('getSourcesAndSinks :>> ', res)
         this.sinks = res.data?.sinks || []
         this.sources = res.data?.sources || []
       })

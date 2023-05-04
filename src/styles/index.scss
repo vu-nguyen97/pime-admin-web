@@ -64,26 +64,6 @@ div:focus {
   outline: none;
 }
 
-.fr {
-  float: right;
-}
-
-.fl {
-  float: left;
-}
-
-.block {
-  display: block;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.inlineBlock {
-  display: block;
-}
-
 .clearfix {
   &:after {
     visibility: hidden;
@@ -130,10 +110,6 @@ aside {
 
 .pagination-container {
   margin-top: 30px;
-}
-
-.text-center {
-  text-align: center
 }
 
 .sub-navbar {

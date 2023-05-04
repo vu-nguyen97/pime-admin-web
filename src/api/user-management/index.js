@@ -41,7 +41,15 @@ export function getBanReasons() {
 
 export function banUser(data) {
   return request({
-    url: 'admin-api/accounts/ban',
+    url: '/admin-api/accounts/ban',
+    method: 'post',
+    data
+  })
+}
+
+export function changeCurrency(data) {
+  return request({
+    url: '/admin-api/accounts/c/p-or-m',
     method: 'post',
     data
   })
