@@ -39,17 +39,23 @@
           <table-sort-icons field="sex" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="username">
+      <el-table-column align="center" width="130" prop="username">
         <template slot="header">
           <table-sort-icons field="username" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="display_name">
+      <el-table-column align="center" width="130" prop="display_name">
         <template slot="header">
           <table-sort-icons field="display_name" field-label="Name" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
       </el-table-column>
-      <el-table-column align="center">
+      <el-table-column align="center" width="90">
+        <template slot="header">
+          <table-sort-icons field="level" table-ref="tableListUser" :sort-data="sortData" :self="this" />
+        </template>
+        <template v-if="row.stats" slot-scope="{row}"><span>{{ row.stats.level | toThousandFilter }}</span></template>
+      </el-table-column>
+      <el-table-column align="center" width="160">
         <template slot="header">
           <table-sort-icons field="created_at" field-label="Created at" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
@@ -57,47 +63,47 @@
           <span>{{ row.created_at | moment }}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="last_join_at">
+      <el-table-column align="center" width="130" prop="last_join_at">
         <template slot="header">
           <table-sort-icons field="last_join_at" field-label="Last join at" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="country">
+      <el-table-column align="center" width="100" prop="country">
         <template slot="header">
           <table-sort-icons field="country" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
       </el-table-column>
-      <el-table-column align="center" width="110">
+      <el-table-column align="center" width="120">
         <template slot="header">
           <table-sort-icons field="chip" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
-        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.chip | numberWithCommas }}</span></template>
+        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.chip | toThousandFilter }}</span></template>
       </el-table-column>
       <el-table-column align="center" width="110">
         <template slot="header">
           <table-sort-icons field="gem" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
-        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.gem | numberWithCommas }}</span></template>
+        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.gem | toThousandFilter }}</span></template>
       </el-table-column>
       <el-table-column align="center" width="110">
         <template slot="header">
           <table-sort-icons field="gold" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
-        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.gold | numberWithCommas }}</span></template>
+        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.gold | toThousandFilter }}</span></template>
       </el-table-column>
       <el-table-column align="center" width="110">
         <template slot="header">
           <table-sort-icons field="pime" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
-        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.pime | numberWithCommas }}</span></template>
+        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.pime | toThousandFilter }}</span></template>
       </el-table-column>
       <el-table-column align="center" width="110">
         <template slot="header">
           <table-sort-icons field="usdt" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
-        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.usdt | numberWithCommas }}</span></template>
+        <template v-if="row.currency" slot-scope="{row}"><span>{{ row.currency.usdt | toThousandFilter }}</span></template>
       </el-table-column>
-      <el-table-column align="center" label="Action" width="110">
+      <el-table-column label="Action" width="110" fixed="right">
         <template slot-scope="{row}">
           <el-button size="mini" @click="handleClickView(row)">
             View
@@ -122,7 +128,6 @@
 <script>
 import { getAllUser } from '@/api/user-management'
 import moment from 'moment'
-import { numberWithCommas } from '@/utils/helper'
 import TableSortIcons from '@/components/TableSortIcons'
 
 export default {
@@ -131,8 +136,7 @@ export default {
   filters: {
     moment: function(date) {
       return moment(date).format('DD-MM-YYYY, HH:mm:ss')
-    },
-    numberWithCommas
+    }
   },
   data() {
     return {
@@ -140,7 +144,7 @@ export default {
       search: '',
       banned: '',
       tableData: [],
-      tableMeta: { page: 0, size: 20 },
+      tableMeta: { page: 0, size: 10 },
       sortData: {}
     }
   },
@@ -160,6 +164,7 @@ export default {
     getTableData() {
       const { size, page } = this.tableMeta
       const listCurrencies = ['pime', 'gold', 'usdt', 'chip', 'gem']
+      const listStats = ['level']
       const sort = []
 
       for (const [key, value] of Object.entries(this.sortData)) {
@@ -168,6 +173,9 @@ export default {
         let newKey = key
         if (listCurrencies.includes(key)) {
           newKey = 'currency.' + key
+        }
+        if (listStats.includes(key)) {
+          newKey = 'stats.' + key
         }
         sort.push(value + newKey)
       }

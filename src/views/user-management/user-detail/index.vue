@@ -49,7 +49,7 @@
             <div class="p-sectionTitle">Stats</div>
             <div class="ListStat">
               <div v-for="(value, stat) in userStats" :key="stat" class="statsBg p-2 rounded text-center shadow">
-                <div class="">{{ stat | statFilter }}</div>
+                <div class="">{{ stat | capitalizeWord }}</div>
                 <div class="mt-2 number">{{ value }}</div>
               </div>
             </div>
@@ -67,12 +67,10 @@
 import moment from 'moment'
 import { getUser } from '@/api/user-management'
 import { getCountryNameFromCode } from '@/utils/helper'
-import { capitalizeWord } from '@/utils/format'
 import BanUser from './ban-user.vue'
 import SourcesSinks from './sources-sinks.vue'
 import Currencies from './currencies.vue'
 import SendMessage from './send-message.vue'
-import { numberWithCommas } from '@/utils/helper'
 
 export default {
   name: 'UserDetail',
@@ -81,14 +79,10 @@ export default {
     countryFilter: function(code) {
       return getCountryNameFromCode(code)
     },
-    statFilter: function(code) {
-      return capitalizeWord(code)
-    },
     moment: function(date) {
       if (!date) return ''
       return moment(date).format('DD-MM-YYYY, HH:mm')
-    },
-    numberWithCommas
+    }
   },
   data() {
     return {

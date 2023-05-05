@@ -3,7 +3,7 @@
     <div class="p-sectionTitle">Currencies</div>
     <div class="ListCurrency">
       <div v-for="(value, crrStat) in currencies" :key="crrStat" class="statsBg p-2 rounded text-center shadow">
-        <div class="">{{ crrStat | statFilter }}
+        <div class="">{{ crrStat | capitalizeWord }}
           <el-dropdown class="fr cursor-pointer" trigger="click" @command="e => onClickCurrency(e, crrStat)">
             <i class="pi pi-ellipsis-v text-sm" />
             <el-dropdown-menu slot="dropdown">
@@ -12,7 +12,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </div>
-        <div class="mt-3 number">{{ value | numberWithCommas }}</div>
+        <div class="mt-3 number">{{ value | toThousandFilter }}</div>
       </div>
     </div>
     <el-dialog
@@ -31,18 +31,10 @@
 </template>
 
 <script>
-import { capitalizeWord } from '@/utils/format'
-import { numberWithCommas } from '@/utils/helper'
 import { changeCurrency } from '@/api/user-management'
 
 export default {
   name: 'Currencies',
-  filters: {
-    statFilter: function(code) {
-      return capitalizeWord(code)
-    },
-    numberWithCommas
-  },
   props: {
     currencies: {
       type: Object,

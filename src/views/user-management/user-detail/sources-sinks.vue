@@ -54,11 +54,10 @@
 
 <script>
 import { getSourcesAndSinks } from '@/api/user-management'
-import { getLabelFromStr } from '@/utils/format'
 import { pickerOptions, init7Days } from '@/utils/helpers/calendar'
 
 export default {
-  name: 'SourcesSinks', filters: { getLabelFromStr },
+  name: 'SourcesSinks',
   props: {
     updateKey: {
       type: Number,

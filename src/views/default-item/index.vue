@@ -109,7 +109,7 @@
 <script>
 import { getDefaultItems, deleteItemById, getAllCategories } from '@/api/default-items'
 import ModalAdd from './modal-add'
-import { getLabelFromStr } from '@/utils/format'
+import { getLabelFromStr } from '@/filters/index'
 import { DELETE_SUCCESS_MESS } from '@/constants/messages'
 import { SORT_TYPES } from '@/constants/constants'
 import TableSortIcons from '@/components/TableSortIcons'

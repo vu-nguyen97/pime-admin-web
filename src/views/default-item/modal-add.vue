@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { getLabelFromStr } from '@/utils/format'
+import { getLabelFromStr } from '@/filters/index'
 import { createItem, editItem } from '@/api/default-items'
 import { ITEM_GETTER_TYPES, RARITIES } from '@/constants/dropdowns'
 import { getDrdFromObj } from '@/utils/helper'

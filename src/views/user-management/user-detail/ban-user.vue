@@ -4,7 +4,7 @@
       <template slot="title">
         <div v-if="hasBanStatus && user.ban_status.banned" class="px-6 py-4 hiddenCollapse">
           <div class="p-sectionTitle">Banned reason:
-            <span class="text-danger text-xl">{{ user.ban_status.ban_reason | labelFilter }}</span>
+            <span class="text-danger text-xl">{{ user.ban_status.ban_reason | getLabelFromStr }}</span>
           </div>
           <div class="mt-2 text-md">
             <span class="mr-1">(Time:</span> {{ user.ban_status.banned_at | moment }}
@@ -48,15 +48,12 @@
 <script>
 import moment from 'moment'
 import { BAN_SUCCESS } from '@/constants/messages'
-import { getLabelFromStr } from '@/utils/format'
+import { getLabelFromStr } from '@/filters/index'
 import { getBanReasons, banUser } from '@/api/user-management'
 
 export default {
   name: 'BanUser',
   filters: {
-    labelFilter: function(str) {
-      return getLabelFromStr(str)
-    },
     moment: function(date) {
       if (!date) return ''
       return moment(date).format('DD-MM-YYYY, HH:mm')

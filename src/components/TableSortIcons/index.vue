@@ -19,12 +19,10 @@
 </template>
 
 <script>
-import { getLabelFromStr } from '@/utils/format'
 import { SORT_STATUS, ASC, DESC, SORTABLE } from '@/constants/constants'
 
 export default {
   name: 'TableSortIcons',
-  filters: { getLabelFromStr },
   props: {
     field: {
       type: String,
