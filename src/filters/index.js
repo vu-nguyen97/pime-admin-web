@@ -1,3 +1,4 @@
+import moment from 'moment'
 // import parseTime, formatTime and set to filter
 export { parseTime, formatTime } from '@/utils'
 
@@ -104,4 +105,8 @@ export const getLabelFromStr = (str) => {
   }
 
   return results
+}
+
+export function dateFormatter(date) {
+  return moment(date).format('DD-MM-YYYY, HH:mm:ss')
 }

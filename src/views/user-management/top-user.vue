@@ -103,7 +103,7 @@
           <table-sort-icons field="created_at" field-label="Created at" table-ref="tableTopLevel" :sort-data="sortData" :self="this" />
         </template>
         <template slot-scope="{row}">
-          <span>{{ row.created_at | moment }}</span>
+          <span>{{ row.created_at | dateFormatter }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" prop="last_join_at" width="120">
@@ -172,11 +172,6 @@ import { SORT_TYPES } from '@/constants/constants'
 export default {
   name: 'TopUser',
   components: { TableSortIcons },
-  filters: {
-    moment: function(date) {
-      return moment(date).format('DD-MM-YYYY, HH:mm:ss')
-    }
-  },
   data() {
     return {
       isLoading: false,

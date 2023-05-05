@@ -9,4 +9,6 @@ export const SORT_TYPES = {
   number: 'number'
 }
 
+export const DEFAULT_CURRENCY = 'GOLD'
+
 export const FORMATTED_DATE = 'DD-MM-YYYY'

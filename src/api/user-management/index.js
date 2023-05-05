@@ -16,6 +16,21 @@ export function searchTopLevel(params) {
   })
 }
 
+export function getTopChangedGold(params) {
+  return request({
+    url: '/admin-api/accounts/currency-mov/top',
+    method: 'get',
+    params
+  })
+}
+
+export function getCurrencyTypes() {
+  return request({
+    url: '/admin-api/currency/types',
+    method: 'get'
+  })
+}
+
 // APIs for DetailUser page
 export function getUser(id) {
   return request({

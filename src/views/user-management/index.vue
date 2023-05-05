@@ -7,6 +7,9 @@
       <el-tab-pane label="Top User" lazy>
         <top-user />
       </el-tab-pane>
+      <el-tab-pane label="Top Change" lazy>
+        <top-change />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -14,10 +17,11 @@
 <script>
 import TopUser from './top-user.vue'
 import ListUser from './list-user.vue'
+import TopChange from './top-change.vue'
 
 export default {
   name: 'UserManagement',
-  components: { TopUser, ListUser }
+  components: { TopUser, ListUser, TopChange }
 }
 </script>
 
