@@ -54,3 +54,11 @@ export function changeCurrency(data) {
     data
   })
 }
+
+export function sendMessage(data) {
+  return request({
+    url: '/admin-api/accounts/pm',
+    method: 'post',
+    data
+  })
+}

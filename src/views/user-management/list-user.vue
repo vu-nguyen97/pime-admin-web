@@ -31,7 +31,7 @@
           <table-sort-icons field="id" table-ref="tableListUser" :sort-data="sortData" :self="this" />
         </template>
         <template slot-scope="{row}">
-          <span class="cursor-pointer hover-primary" title="View this user" @click="handleClickView(row)">{{ row.id }}</span>
+          <router-link :to="'user-management/user-detail/' + row.id" title="View this user" class="hover-primary">{{ row.id }}</router-link>
         </template>
       </el-table-column>
       <el-table-column align="center" width="100" prop="sex">
